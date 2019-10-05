@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\NegaritHooks;
 
+use App\Jobs\OnReceivedMessageTask;
 use App\MessagePort;
 use App\ReceivedMessage;
 use Illuminate\Http\Request;
@@ -46,7 +47,7 @@ class NegaritHookController extends Controller
                         $newReceivedMessage->display_name = isset($credential['display_name'])? $credential['display_name']: null;
                         $newReceivedMessage->received_date = $credential['received_date'];
                         if($newReceivedMessage->save()){
-//                            dispatch(new ReceivedMessageActionTask());
+                            dispatch(new OnReceivedMessageTask($newReceivedMessage));
                         }
                     }
                 }

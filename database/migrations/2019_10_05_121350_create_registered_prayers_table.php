@@ -19,6 +19,9 @@ class CreateRegisteredPrayersTable extends Migration
             $table->string('full_name')->nullable();
             $table->string('location')->nullable();
             $table->string('language')->nullable();
+            $table->string('day_name')->nullable();
+            $table->time('sch_time')->nullable();
+            $table->integer('prayer_length')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });
