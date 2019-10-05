@@ -15,6 +15,11 @@ class CreateSentMessagesTable extends Migration
     {
         Schema::create('sent_messages', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('message_port_id')->unsigned();
+            $table->string('message');
+            $table->string('phone');
+            $table->boolean('is_sent')->default(false);
+            $table->boolean('is_delivered')->default(false);
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRegisteredPrayersTable extends Migration
+class CreatePrayerMessagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateRegisteredPrayersTable extends Migration
      */
     public function up()
     {
-        Schema::create('registered_prayers', function (Blueprint $table) {
+        Schema::create('prayer_messages', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('phone');
-            $table->string('full_name')->nullable();
+            $table->longText('message');
+            $table->integer('message_port_id')->unsigned();
             $table->string('location')->nullable();
             $table->string('language')->nullable();
-            $table->boolean('status')->default(true);
+            $table->string('time')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateRegisteredPrayersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('registered_prayers');
+        Schema::dropIfExists('prayer_messages');
     }
 }
