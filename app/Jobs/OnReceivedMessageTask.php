@@ -34,7 +34,7 @@ class OnReceivedMessageTask implements ShouldQueue
      */
     public function handle()
     {
-        $keyWords = explode(' ',trim($this->receivedMessage->message));
+        $keyWords = explode(' ', trim($this->receivedMessage->message));
         if($keyWords && count($keyWords) > 0) {
             if (strtolower($keyWords[0]) == "reg") {
                 // REG
