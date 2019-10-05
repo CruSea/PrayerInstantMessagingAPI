@@ -15,7 +15,16 @@ class CreateReceivedMessagesTable extends Migration
     {
         Schema::create('received_messages', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('message_port_id')->unsigned();
+            $table->string('message_id')->nullable();
+            $table->integer('gateway_id')->nullable();
+            $table->longText('message')->nullable();
+            $table->string('phone');
+            $table->string('display_name')->nullable();
+            $table->integer('sms_port_id');
+            $table->dateTime('received_date');
             $table->timestamps();
+            $table->foreign('message_port_id')->references('id')->on('message_ports')->onDelete('cascade');
         });
     }
 
