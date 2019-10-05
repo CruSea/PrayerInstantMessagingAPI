@@ -47,7 +47,17 @@ class OnReceivedMessageController extends Controller
     {
         $oldPrayer = RegisteredPrayer::where('phone', '=', $phone)->first();
         if ($oldPrayer instanceof RegisteredPrayer) {
-            $oldPrayer->status = false;
+            $oldPrayer->day_name = isset($day_name) ? $day_name : null;
+            $oldPrayer->sch_time = isset($sch_time) ? $sch_time : null;
+            $oldPrayer->update();
+        }
+    }
+    public function updateUserProfile(string $phone, string $first_name, string $last_name)
+    {
+        $oldPrayer = RegisteredPrayer::where('phone', '=', $phone)->first();
+        if($oldPrayer instanceof RegisteredPrayer) {
+            $last_name = isset($last_name) ? $last_name : null
+            $oldPrayer->furll_name = $first_name. ' '. $last_name;
             $oldPrayer->update();
         }
     }
