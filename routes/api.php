@@ -37,3 +37,7 @@ Route::group(['namespace' => 'MessagePorts'], function () {
     Route::patch('/message_port', 'MessagePortsController@update');
     Route::delete('/message_port/{id}', 'MessagePortsController@delete');
 });
+
+Route::group(['namespace' => 'NegaritHooks'], function () {
+    Route::post('/negarit_web_hook', 'NegaritHookController@negaritWebHook');
+});
