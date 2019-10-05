@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\MessagePorts;
 
 use App\MessagePort;
-use App\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class MessagePortsController extends Controller
