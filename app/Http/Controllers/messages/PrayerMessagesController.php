@@ -22,7 +22,7 @@ class PrayerMessagesController extends Controller
     {
         try {
             $paginate_num = request()->input('PAGINATE_SIZE') ? request()->input('PAGINATE_SIZE') : 10;
-            $prayersMessages = PrayerMessage::orderBy('id', 'DESC')->paginate($paginate_num);
+            $prayersMessages = PrayerMessage::with('message_port')->orderBy('id', 'DESC')->paginate($paginate_num);
             return response()->json(['status' => true, 'message' => 'prayers-messages successfully fetched', 'result' => $prayersMessages], 200);
         } catch (\Exception $exception) {
             return response()->json(['status' => false, 'message' => 'Whoops! something went wrong', 'error' => $exception->getMessage()], 500);
@@ -43,8 +43,8 @@ class PrayerMessagesController extends Controller
                 return response()->json(['error' => $error], 500);
             }
             $newPrayerMessage = new PrayerMessage();
-            $newPrayerMessage->message = $credential['full_name'];
-            $newPrayerMessage->message_port_id = $credential['full_name'];
+            $newPrayerMessage->message = $credential['message'];
+            $newPrayerMessage->message_port_id = $credential['message_port_id'];
             $newPrayerMessage->location = isset($credential['location'])? $credential['location']: null;
             $newPrayerMessage->language = isset($credential['language'])? $credential['language']: null;
             if ($newPrayerMessage->save()) {

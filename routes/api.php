@@ -59,3 +59,9 @@ Route::group(['namespace' => 'Messages'], function () {
     Route::delete('/prayers_message/{id}', 'PrayerMessagesController@delete');
 });
 
+Route::group(['namespace' => 'RegisteredPrayers'], function () {
+    Route::get('/registered_prayers', 'PrayersController@getPrayers');
+    Route::get('/registered_prayers_location', 'PrayersController@getPrayerLocations');
+    Route::get('/registered_prayers_language', 'PrayersController@getPrayerLanguages');
+});
+

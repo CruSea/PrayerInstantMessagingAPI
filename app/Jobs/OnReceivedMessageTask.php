@@ -38,7 +38,7 @@ class OnReceivedMessageTask implements ShouldQueue
         if($keyWords && count($keyWords) > 0) {
             if (strtolower($keyWords[0]) == "reg") {
                 // REG
-                $this->messageActionCtl->registerPrayer($this->receivedMessage->phone, null, null);
+                $this->messageActionCtl->registerPrayer($this->receivedMessage->phone, $keyWords[1], $this->receivedMessage->message_port_id);
             } elseif (strtolower($keyWords[0]) == "stop") {
                 // STOP
                 $this->messageActionCtl->unSubscribePrayer($this->receivedMessage->phone);
