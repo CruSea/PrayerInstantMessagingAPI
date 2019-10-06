@@ -53,7 +53,9 @@ Route::group(['namespace' => 'Messages'], function () {
 });
 
 Route::group(['namespace' => 'Messages'], function () {
-    Route::get('/prayers_messages', 'ReceivedMessagesController@getReceivedMessages_Paginated');
-    Route::get('/prayers_messages_paginated', 'ReceivedMessagesController@getReceivedMessages_Paginated');
+    Route::get('/prayers_messages', 'PrayerMessagesController@getPrayersMessages');
+    Route::get('/prayers_messages_paginated', 'PrayerMessagesController@getReceivedMessages_Paginated');
+    Route::post('/prayers_message', 'PrayerMessagesController@create');
+    Route::delete('/prayers_message/{id}', 'PrayerMessagesController@delete');
 });
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Messages;
 use App\Jobs\PrayerMessageTask;
 use App\PrayerMessage;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Support\Facades\Validator;
 
 class PrayerMessagesController extends Controller
@@ -54,6 +55,22 @@ class PrayerMessagesController extends Controller
             }
         } catch (\Exception $exception) {
             return response()->json(['status' => false, 'message' => 'Whoops! something went wrong', 'error' => $exception->getMessage()], 500);
+        }
+    }
+    public function delete($id) {
+        try {
+            $oldPrayerMessage = PrayerMessage::where('id', '=', $id)->first();
+            if ($oldPrayerMessage instanceof PrayerMessage) {
+                if ($oldPrayerMessage->delete()) {
+                    return response()->json(['status' => true, 'message' => 'prayer-message successfully deleted'], 200);
+                } else {
+                    return response()->json(['status' => false, 'error' => 'Whoops! failed to delete the prayer-message account'], 500);
+                }
+            } else {
+                return response()->json(['status' => false, 'error' => 'Whoops! unable to find the prayer-message information'], 500);
+            }
+        } catch (\Exception $exception) {
+            return response()->json(['status' => false, 'error' => 'Whoops! something went wrong', 'message' => $exception->getMessage()], 500);
         }
     }
 }
