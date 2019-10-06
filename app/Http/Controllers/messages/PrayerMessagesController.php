@@ -3,12 +3,7 @@
 namespace App\Http\Controllers\Messages;
 
 use App\Jobs\PrayerMessageTask;
-use App\Jobs\ProcessPrayerMessageTask;
 use App\PrayerMessage;
-use App\RegisteredPrayer;
-use App\SentMessage;
-use App\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
