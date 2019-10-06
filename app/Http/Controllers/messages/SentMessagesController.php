@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 
 class SentMessagesController extends Controller
 {
-    public function getReceivedMessages_Paginated()
+    public function getSentMessages_Paginated()
     {
         try {
             $paginate_num = request()->input('PAGINATE_SIZE') ? request()->input('PAGINATE_SIZE') : 10;

@@ -34,7 +34,7 @@ class PrayerMessageTask implements ShouldQueue
      */
     public function handle()
     {
-        $prayers = RegisteredPrayer::where('location', '=', $this->prayerMessage->location)->get();
+        $prayers = RegisteredPrayer::where('location', '=', $this->prayerMessage->location)->where('language', '=', $this->prayerMessage->language)->where('status', '=', true)->where('is_deleted', '=', false)->get();
         foreach ($prayers as $prayer) {
             if($prayer instanceof RegisteredPrayer) {
                 $newSentMessage = new SentMessage();

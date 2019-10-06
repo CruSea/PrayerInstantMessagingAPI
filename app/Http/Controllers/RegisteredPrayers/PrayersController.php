@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\RegisteredPrayers;
 
 use App\MessagePort;
+use App\RegisteredPrayer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -20,18 +21,8 @@ class PrayersController extends Controller
     {
         try {
             $paginate_num = request()->input('PAGINATE_SIZE') ? request()->input('PAGINATE_SIZE') : 10;
-            $messagePorts = MessagePort::where('is_deleted', '=', false)->orderBy('id', 'DESC')->paginate($paginate_num);
-            return response()->json(['status' => true, 'message' => 'message-ports successfully fetched', 'result' => $messagePorts], 200);
-        } catch (\Exception $exception) {
-            return response()->json(['status' => false, 'message' => 'Whoops! something went wrong', 'error' => $exception->getMessage()], 500);
-        }
-    }
-
-    public function getPrayersPaginated()
-    {
-        try {
-            $messagePorts = MessagePort::where('is_deleted', '=', false)->orderBy('id', 'DESC')->get();
-            return response()->json(['status' => true, 'message' => 'message-ports successfully fetched', 'result' => $messagePorts], 200);
+            $registeredPrayers = RegisteredPrayer::where('is_deleted', '=', false)->orderBy('id', 'DESC')->paginate($paginate_num);
+            return response()->json(['status' => true, 'message' => 'registered-prayers successfully fetched', 'result' => $registeredPrayers], 200);
         } catch (\Exception $exception) {
             return response()->json(['status' => false, 'message' => 'Whoops! something went wrong', 'error' => $exception->getMessage()], 500);
         }

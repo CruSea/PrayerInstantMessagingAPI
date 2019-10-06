@@ -41,3 +41,13 @@ Route::group(['namespace' => 'MessagePorts'], function () {
 Route::group(['namespace' => 'NegaritHooks'], function () {
     Route::post('/negarit_web_hook', 'NegaritHookController@negaritWebHook');
 });
+
+Route::group(['namespace' => 'Messages'], function () {
+    Route::get('/sent_messages', 'SentMessagesController@getSentMessages_Paginated');
+    Route::get('/sent_messages_paginated', 'SentMessagesController@getSentMessages_Paginated');
+});
+
+Route::group(['namespace' => 'Messages'], function () {
+    Route::get('/received_messages', 'ReceivedMessagesController@getReceivedMessages_Paginated');
+    Route::get('/received_messages_paginated', 'ReceivedMessagesController@getReceivedMessages_Paginated');
+});

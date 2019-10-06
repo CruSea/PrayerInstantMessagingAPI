@@ -23,6 +23,7 @@ class CreateRegisteredPrayersTable extends Migration
             $table->time('sch_time')->nullable();
             $table->integer('prayer_length')->nullable();
             $table->boolean('status')->default(true);
+            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });
     }

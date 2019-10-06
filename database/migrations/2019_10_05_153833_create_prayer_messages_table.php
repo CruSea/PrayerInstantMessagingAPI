@@ -19,7 +19,7 @@ class CreatePrayerMessagesTable extends Migration
             $table->integer('message_port_id')->unsigned();
             $table->string('location')->nullable();
             $table->string('language')->nullable();
-            $table->string('time')->nullable();
+            $table->dateTime('time')->nullable();
             $table->timestamps();
         });
     }
