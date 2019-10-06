@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\SentMessage;
-use App\Http\Controllers\messages\ScheduleMessageController;
+use App\Http\Controllers\Messages\ScheduleMessageController;
 use App\RegisteredPrayer;
 use DateTime;
 
