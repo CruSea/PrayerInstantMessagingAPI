@@ -48,7 +48,6 @@ class SendToNegaritTask implements ShouldQueue
             if ($response_data) {
                 if (isset($response_data->status)) {
                     $this->sentMessage->is_sent = true;
-                    $this->sentMessage->attempts = 1;
                     $this->sentMessage->update();
                 }
             }

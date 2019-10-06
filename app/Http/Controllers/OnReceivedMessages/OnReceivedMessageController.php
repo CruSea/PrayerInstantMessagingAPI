@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\OnReceivedMessages;
 
+use App\Jobs\SendToNegaritTask;
 use App\RegisteredPrayer;
+use App\SentMessage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,21 +18,29 @@ class OnReceivedMessageController extends Controller
     {
     }
 
-    public function registerPrayer(string $phone, string $location, string $language)
+    public function registerPrayer(string $phone, $full_name, $message_port_id)
     {
         $oldRegisteredPrayer = RegisteredPrayer::where('phone', '=', $phone)->first();
         if ($oldRegisteredPrayer instanceof RegisteredPrayer) {
             $oldRegisteredPrayer->status = true;
-            $oldRegisteredPrayer->location = isset($location) ? $location : "ETH";
-            $oldRegisteredPrayer->language = isset($language) ? $language : "ENG";
+            $oldRegisteredPrayer->full_name = isset($full_name) ? $full_name : $oldRegisteredPrayer->full_name;
             $oldRegisteredPrayer->update();
         } else {
             $newPrayer = new RegisteredPrayer();
             $newPrayer->phone = $phone;
             $newPrayer->status = true;
+            $newPrayer->full_name = isset($full_name) ? $full_name : "UNKNOWN";
             $newPrayer->location = isset($location) ? $location : "ETH";
             $newPrayer->language = isset($language) ? $language : "ENG";
-            $newPrayer->save();
+            if($newPrayer->save()) {
+                $newSentMessage = new SentMessage();
+                $newSentMessage->message_port_id = $message_port_id;
+                $newSentMessage->message = "Congratulation You Have Registered To Prayer Mobilization Platform.\nTo Change Your Language\n  LNG ENG\nTo Schedule Your Prayer Time\n  SCH MON 04:34\nTo Change Your Location\n  LOC ETH";
+                $newSentMessage->phone = $phone;
+                if($newSentMessage->save()){
+                    dispatch(new SendToNegaritTask($newSentMessage));
+                }
+            }
         }
     }
 
@@ -56,7 +66,7 @@ class OnReceivedMessageController extends Controller
     {
         $oldPrayer = RegisteredPrayer::where('phone', '=', $phone)->first();
         if($oldPrayer instanceof RegisteredPrayer) {
-            $last_name = isset($last_name) ? $last_name : null
+            $last_name = isset($last_name) ? $last_name : null;
             $oldPrayer->furll_name = $first_name. ' '. $last_name;
             $oldPrayer->update();
         }
