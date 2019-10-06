@@ -15,7 +15,7 @@ class CreateRegisteredPrayersTable extends Migration
     {
         Schema::create('registered_prayers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('phone');
+            $table->string('phone')->unique();
             $table->string('full_name')->nullable();
             $table->string('location')->nullable();
             $table->string('language')->nullable();

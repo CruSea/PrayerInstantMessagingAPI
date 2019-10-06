@@ -72,6 +72,7 @@ class UsersController extends Controller
                 $newUser->email = $credential['email'];
                 $newUser->phone = isset($credential['phone'])? $credential['phone']: null;
                 $newUser->password = bcrypt($credential['password']);
+                $newUser->is_active = true;
                 $newUser->user_type_id = isset($credential['user_type_id'])? $credential['user_type_id'] : 5;
                 if ($newUser->save()) {
                     return response()->json(['status' => true, 'message' => 'successfully registered', 'result' => $newUser], 200);
