@@ -71,4 +71,22 @@ class OnReceivedMessageController extends Controller
             $oldPrayer->update();
         }
     }
+
+    public function updateUserLocation(string $phone, string $location)
+    {
+        $oldPrayer = RegisteredPrayer::where('phone', '=', $phone)->first();
+        if($oldPrayer instanceof RegisteredPrayer) {
+            $oldPrayer->location = isset($location) ? $location : $oldPrayer->location;
+            $oldPrayer->update();
+        }
+    }
+
+    public function updateUserLanguage(string $phone, string $language)
+    {
+        $oldPrayer = RegisteredPrayer::where('phone', '=', $phone)->first();
+        if($oldPrayer instanceof RegisteredPrayer) {
+            $oldPrayer->language = isset($language) ? $language : $oldPrayer->language;
+            $oldPrayer->update();
+        }
+    }
 }

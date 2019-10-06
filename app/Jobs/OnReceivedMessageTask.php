@@ -45,9 +45,15 @@ class OnReceivedMessageTask implements ShouldQueue
             } elseif (strtolower($keyWords[0]) == "sch") {
                 // SCH MON 10:34
                 $this->messageActionCtl->schedulePrayerTime($this->receivedMessage->phone, $keyWords[1], $keyWords[2]);
-            } elseif (strtolower($keyWords[0]) == "upd" && count($keyWords) > 1) {
+            } elseif (strtolower($keyWords[0]) == "upd" && count($keyWords) > 2) {
                 // UPDATE profile
                 $this->messageActionCtl->updateUserProfile($this->receivedMessage->phone, $keyWords[1], $keyWords[2]);
+            } elseif (strtolower($keyWords[0]) == "loc" && count($keyWords) > 1) {
+                // UPDATE profile
+                $this->messageActionCtl->updateUserLocation($this->receivedMessage->phone, $keyWords[1]);
+            } elseif (strtolower($keyWords[0]) == "lng" && count($keyWords) > 1) {
+                // UPDATE profile
+                $this->messageActionCtl->updateUserLanguage($this->receivedMessage->phone, $keyWords[1]);
             }
         }
     }
