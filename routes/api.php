@@ -51,3 +51,9 @@ Route::group(['namespace' => 'Messages'], function () {
     Route::get('/received_messages', 'ReceivedMessagesController@getReceivedMessages_Paginated');
     Route::get('/received_messages_paginated', 'ReceivedMessagesController@getReceivedMessages_Paginated');
 });
+
+Route::group(['namespace' => 'Messages'], function () {
+    Route::get('/prayers_messages', 'ReceivedMessagesController@getReceivedMessages_Paginated');
+    Route::get('/prayers_messages_paginated', 'ReceivedMessagesController@getReceivedMessages_Paginated');
+});
+

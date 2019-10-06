@@ -47,7 +47,7 @@ class OnReceivedMessageTask implements ShouldQueue
                 $this->messageActionCtl->schedulePrayerTime($this->receivedMessage->phone, $keyWords[1], $keyWords[2]);
             } elseif (strtolower($keyWords[0]) == "upd" && count($keyWords) > 1) {
                 // UPDATE profile
-                $this->messageActionCtl->updateUserProfile($this->receivedMessage->phone, $keyWords[1], $keyWords[2])
+                $this->messageActionCtl->updateUserProfile($this->receivedMessage->phone, $keyWords[1], $keyWords[2]);
             }
         }
     }
