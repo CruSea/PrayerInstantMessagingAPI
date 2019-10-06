@@ -59,6 +59,7 @@ class MessagePortsController extends Controller
             $newMessagePort->sms_port_id = $credential['sms_port_id'];
             $newMessagePort->campaign_name = isset($credential['campaign_name']) ? $credential['campaign_name'] : null;
             $newMessagePort->sms_port_name = isset($credential['sms_port_name']) ? $credential['sms_port_name'] : null;
+            $newMessagePort->is_active = true;
             if ($newMessagePort->save()) {
                 return response()->json(['status' => true, 'message' => 'message-port successfully created', 'result' => $newMessagePort], 200);
             }
